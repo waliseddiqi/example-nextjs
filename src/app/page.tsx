@@ -29,7 +29,7 @@ export default function QuizPage() {
     }
   ];
 
-  const handleAnswerClick = (questionIndex, optionIndex) => {
+  const handleAnswerClick = (questionIndex: number , optionIndex:number) => {
     const correctAnswer = questions[questionIndex].answers.includes(questions[questionIndex].options[optionIndex]);
     const message = correctAnswer
       ? questions[questionIndex].cuteMessages[getRandomInt(questions[questionIndex].cuteMessages.length-1)]
@@ -38,7 +38,7 @@ export default function QuizPage() {
     setIsOpen(true);
   };
 
-  function getRandomInt(max) {
+  function getRandomInt(max:number) {
    
     max = Math.floor(max); // Round down to the nearest integer
     return Math.floor(Math.random() * (max - 0 + 1)) + 0;
@@ -46,7 +46,7 @@ export default function QuizPage() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300">
       <div className="p-8 bg-white shadow-lg rounded-lg max-w-lg w-full">
-        <h1 className="text-3xl font-bold text-center text-pink-600">Let's Play a Fun Quiz!</h1>
+        <h1 className="text-3xl font-bold text-center text-pink-600">Helloo My Milky Way ❤️🌌</h1>
 
         {questions.map((q, qIndex) => (
           <div key={qIndex} className="my-4">
