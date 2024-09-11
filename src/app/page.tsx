@@ -4,6 +4,7 @@ import Modal from 'react-modal';
 import styles from './page.module.css';
 import Image from 'next/image';
 
+
 export default function QuizPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [message, setMessage] = useState('');
@@ -26,6 +27,12 @@ export default function QuizPage() {
       options: ['Picnic', 'Movies', 'Beach', 'Stargazing','Painting together','karaoke'],
       answers: ['Picnic', 'Movies', 'Beach', 'Stargazing','Painting together','karaoke'],
       cuteMessages: ['Lovely bbi tell me about you answer ❤️❤️❤️ ','Amazing choice sweet bbi','My purple queen ❤️❤️❤️'],
+    },
+    {
+      question: 'Bbi what pet animal should we get when we move in together',
+      options: ['Cute small Doggo', 'Cat', 'Bunny', 'Fish','Parrot'],
+      answers: ['Cute small Doggo', 'Cat', 'Bunny', 'Fish','Parrot'],
+      cuteMessages: ['Amazing choice sweet bbi','Yayyy babi lets get a pet pleasee'],
     }
   ];
 
@@ -36,12 +43,28 @@ export default function QuizPage() {
       : 'Oops! Select something else sweetheart ):';
     setMessage(message);
     setIsOpen(true);
+
+    writeTofile(questions[questionIndex].question,questions[questionIndex].options[optionIndex]);
+
   };
 
   function getRandomInt(max:number) {
    
     max = Math.floor(max); // Round down to the nearest integer
     return Math.floor(Math.random() * (max - 0 + 1)) + 0;
+  }
+
+  async function writeTofile(question:string, answer:string){
+    const response = await fetch('/api/saveData', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ content: {'question':question,answer:answer} }),
+    });
+
+    const result = await response.json();
+    console.log(result);
   }
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-r from-pink-300 via-purple-300 to-blue-300">
